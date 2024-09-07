@@ -55,7 +55,6 @@ namespace KrestikiNoliki
                 byte[] nameData = Encoding.UTF8.GetBytes(playerName);
                 await stream.WriteAsync(nameData, 0, nameData.Length);
 
-                // Запускаем асинхронное получение состояния игры
                 await Task.Run(() => ReceiveGameState());
             }
             catch (Exception ex)
@@ -110,7 +109,6 @@ namespace KrestikiNoliki
                     string player2 = parts[2];
                     int currentPlayer = int.Parse(parts[3]);
 
-                    // Обновление UI должно выполняться в основном потоке
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         for (int i = 0; i < boardState.Length; i++)
